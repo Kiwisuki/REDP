@@ -1,0 +1,3 @@
+[submodule "Chrome-Scraper"]
+	path = Chrome-Scraper
+	url = https://github.com/Kiwisuki/Chrome-Scraper.git
