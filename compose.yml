@@ -1,0 +1,5 @@
+services:
+  chrome_scraper:
+    extends:
+      file: ./Chrome-Scraper/compose.yml
+      service: chrome_scraper
