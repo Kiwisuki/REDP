@@ -17,4 +17,4 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Command to run the application
-CMD ["python", "-m", "src.aruodas_scraper.main"]
+CMD ["sh", "-c", "sleep 120 && python -m src.aruodas_scraper.main"]

@@ -1,5 +1,58 @@
 services:
+
   chrome_scraper:
     extends:
-      file: ./Chrome-Scraper/compose.yml
+      file: ./scraping-service/compose.yml
       service: chrome_scraper
+    networks:
+      - default_network
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d myapp"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - default_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "5050:80"
+    volumes:
+    - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - db
+    networks:
+      - default_network
+
+  html_crawler:
+    build:
+      context: ./html-crawler
+    depends_on:
+      db:
+        condition: service_healthy
+      chrome_scraper:
+        condition: service_started
+    networks:
+      - default_network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+networks:
+  default_network:
+    driver: bridge

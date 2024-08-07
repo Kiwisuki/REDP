@@ -2,10 +2,14 @@ import functools
 import os
 
 import requests
+import logging
+
+LOGGER = logging.getLogger(__name__)
 
 SCRAPING_SERVICE_URL = os.getenv(
-    "SCRAPING_SERVICE_URL", "http://0.0.0.0:8000/ai/scrape"
+    "SCRAPING_SERVICE_URL", "http://chrome_scraper:8000/scrape"
 )
+LOGGER.info(f"Using scraping service at {SCRAPING_SERVICE_URL}")
 
 
 def scrape_url(url: str, scraping_service_url: str = SCRAPING_SERVICE_URL) -> str:

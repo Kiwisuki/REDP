@@ -15,9 +15,9 @@ class ScrapedHtml(Base):
     __tablename__ = "scraped_html"
     object_id = Column(Integer, primary_key=True)
     url = Column(String, nullable=False)
-    filename = Column(String, nullable=False)
     content_type = Column(String, nullable=False)
     date_scraped = Column(DateTime, default=func.now())
+    html_content = Column(String, nullable=True)
 
 
 def get_engine_and_session(database_url: str = DATABASE_URL) -> Tuple[Engine, Session]:

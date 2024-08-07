@@ -18,7 +18,7 @@ SEARCH_URLS = {
 
 ALL_OBJECT_TYPES = list(SEARCH_URLS.keys())
 CURRENT_SCRIPT_PATH = Path(__file__).resolve()
-PROJECT_ROOT = CURRENT_SCRIPT_PATH.parents[1]
+PROJECT_ROOT = CURRENT_SCRIPT_PATH.parents[2]
 DATA_DIR = PROJECT_ROOT / "scraped_data"
 DATA_DIR.mkdir(exist_ok=True)
 

@@ -17,12 +17,7 @@ def scrape_and_store_object(
     LOGGER.info(f"Scraping and storing {object_id}")
     url = f"https://www.aruodas.lt/{object_id}"
     html = scrape_url(url)
-
-    filename = DATA_DIR / f"{id}.html"
-    with Path.open(filename, "w") as f:
-        f.write(html)
-
-    db_entry = ScrapedHtml(url=url, filename=str(filename), content_type=object_type)
+    db_entry = ScrapedHtml(url=url, content_type=object_type, html_content=html)
     db_session.add(db_entry)
     db_session.commit()
     LOGGER.info(f"Successfully scraped and stored {object_id}")

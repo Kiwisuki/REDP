@@ -10,7 +10,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 def scraping_job(
-    page_limit: int = 2, object_types_to_scrape: List[str] = ALL_OBJECT_TYPES
+    page_limit: int = 1, object_types_to_scrape: List[str] = ALL_OBJECT_TYPES
 ) -> None:
     """Scrape the Aruodas website."""
     engine, session = get_engine_and_session()
