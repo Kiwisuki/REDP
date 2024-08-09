@@ -8,6 +8,8 @@ from sqlalchemy.sql import func
 from src.aruodas_scraper import DATABASE_URL, Base
 
 
+# NOTE: The current implementation raises some issues, since this database table won't be accessible by other microservices,
+# NOTE: we might need to create a shared package that contains the database models and the database connection function.
 class ScrapedHtml(Base):
 
     """Model for storing scraped HTML content."""
