@@ -1,9 +1,9 @@
 import logging
-from pathlib import Path
+from typing import List
 
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import select
 
-from src.aruodas_scraper import DATA_DIR
 from src.aruodas_scraper.helpers.database import ScrapedHtml
 from src.aruodas_scraper.helpers.html_retrieval import scrape_url
 
@@ -21,3 +21,10 @@ def scrape_and_store_object(
     db_session.add(db_entry)
     db_session.commit()
     LOGGER.info(f"Successfully scraped and stored {object_id}")
+
+
+def get_scraped_ids(db_session: Session) -> List[str]:
+    """Get the set of IDs that have already been scraped."""
+    scraped_urls = db_session.execute(select(ScrapedHtml.url)).scalars().all()
+    scraped_ids = [url.split("/")[-1] for url in scraped_urls]
+    return list(set(scraped_ids))
