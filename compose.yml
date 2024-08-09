@@ -6,6 +6,12 @@ services:
       service: chrome_scraper
     networks:
       - default_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   db:
     image: postgres:latest
@@ -46,7 +52,7 @@ services:
       db:
         condition: service_healthy
       chrome_scraper:
-        condition: service_started
+        condition: service_healthy
     networks:
       - default_network
 
