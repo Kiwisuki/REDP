@@ -1,9 +1,7 @@
 import logging
 
-from sqlalchemy.orm import DeclarativeBase
-
 LOGGER = logging.getLogger(__name__)
-DATABASE_URL = "postgresql://myuser:mypassword@db:5432/myapp"
+
 SEARCH_URLS = {
     "butai": "https://www.aruodas.lt/butai/puslapis/{page_number}/",
     "namai": "https://www.aruodas.lt/namai/puslapis/{page_number}/",
@@ -22,12 +20,6 @@ logging.basicConfig(
     level=logging.INFO,
     handlers=[logging.StreamHandler()],
 )
-
-
-class Base(DeclarativeBase):
-
-    """Base class for all SQLAlchemy models."""
-
 
 try:
     from dotenv import load_dotenv

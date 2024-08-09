@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "aruodas_scraper"
+name = "redp_scraper"
 version = "0.1.0"
 description = "Example template for Python applications"
 authors = ["OBDeleven Data Team"]

@@ -4,8 +4,8 @@ from typing import Dict, List
 
 from bs4 import BeautifulSoup
 
-from src.aruodas_scraper import SEARCH_URLS
-from src.aruodas_scraper.helpers.html_retrieval import url_or_html_parser
+from src.property_data_pipeline import SEARCH_URLS
+from src.property_data_pipeline.crawler.html_retrieval import url_or_html_parser
 
 LOGGER = logging.getLogger(__name__)
 

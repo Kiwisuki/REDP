@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.aruodas_scraper.helpers.html_retrieval import scrape_url
+from src.property_data_pipeline.crawler.html_retrieval import scrape_url
 
 TEST_PAGES = {
     "butai.html": "https://www.aruodas.lt/butai/puslapis/3/",

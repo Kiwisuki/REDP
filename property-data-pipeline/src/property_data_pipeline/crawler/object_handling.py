@@ -4,8 +4,8 @@ from typing import List
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import select
 
-from src.aruodas_scraper.helpers.database import ScrapedHtml
-from src.aruodas_scraper.helpers.html_retrieval import scrape_url
+from src.property_data_pipeline.crawler.html_retrieval import scrape_url
+from src.property_data_pipeline.database.schemas import ScrapedHtml
 
 LOGGER = logging.getLogger(__name__)
 

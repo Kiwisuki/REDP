@@ -1,8 +1,8 @@
 import functools
+import logging
 import os
 
 import requests
-import logging
 
 LOGGER = logging.getLogger(__name__)
 

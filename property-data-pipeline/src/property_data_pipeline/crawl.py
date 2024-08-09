@@ -1,18 +1,18 @@
 import logging
 from typing import List
 
-from src.aruodas_scraper import ALL_OBJECT_TYPES
-from src.aruodas_scraper.helpers.database import get_engine_and_session
-from src.aruodas_scraper.helpers.links_retrieval import retrieve_object_ids
-from src.aruodas_scraper.helpers.object_handling import (
+from src.property_data_pipeline import ALL_OBJECT_TYPES
+from src.property_data_pipeline.crawler.links_retrieval import retrieve_object_ids
+from src.property_data_pipeline.crawler.object_handling import (
     get_scraped_ids,
     scrape_and_store_object,
 )
+from src.property_data_pipeline.database.connection import get_engine_and_session
 
 LOGGER = logging.getLogger(__name__)
 
 
-def scraping_job(
+def crawling_job(
     page_limit: int = 1, object_types_to_scrape: List[str] = ALL_OBJECT_TYPES
 ) -> None:
     """Scrape the Aruodas website."""
@@ -30,4 +30,4 @@ def scraping_job(
 
 
 if __name__ == "__main__":
-    scraping_job()
+    crawling_job()
