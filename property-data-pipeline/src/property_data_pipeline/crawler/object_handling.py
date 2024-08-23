@@ -12,7 +12,7 @@ LOGGER = logging.getLogger(__name__)
 
 def scrape_and_store_object(
     object_id: str, object_type: str, db_session: Session
-) -> None:
+) -> ScrapedHtml:
     """Scrape and store the object with the given ID."""
     LOGGER.info(f"Scraping and storing {object_id}")
     url = f"https://www.aruodas.lt/{object_id}"
@@ -21,6 +21,7 @@ def scrape_and_store_object(
     db_session.add(db_entry)
     db_session.commit()
     LOGGER.info(f"Successfully scraped and stored {object_id}")
+    return db_entry
 
 
 def get_scraped_ids(db_session: Session) -> List[str]:

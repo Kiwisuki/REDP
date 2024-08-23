@@ -47,7 +47,7 @@ services:
 
   html_crawler:
     build:
-      context: ./html-crawler
+      context: ./property-data-pipeline
     depends_on:
       db:
         condition: service_healthy

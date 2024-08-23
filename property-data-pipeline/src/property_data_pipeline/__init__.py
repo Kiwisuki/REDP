@@ -13,7 +13,8 @@ SEARCH_URLS = {
     "trumpalaike-nuoma": "https://www.aruodas.lt/trumpalaike-nuoma/puslapis/{page_number}/",
 }
 
-ALL_OBJECT_TYPES = list(SEARCH_URLS.keys())
+# ALL_OBJECT_TYPES = list(SEARCH_URLS.keys())
+ALL_OBJECT_TYPES = ["butai", "butu-nuoma"]
 
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] - <%(name)s> - %(message)s",

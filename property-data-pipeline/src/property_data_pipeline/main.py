@@ -8,6 +8,7 @@ from src.property_data_pipeline.crawler.object_handling import (
     scrape_and_store_object,
 )
 from src.property_data_pipeline.database.connection import get_engine_and_session
+from src.property_data_pipeline.parser.html_to_db import parse_and_store_flat
 
 LOGGER = logging.getLogger(__name__)
 
@@ -22,7 +23,9 @@ def crawling_job(
     for object_type, retrieved_ids in object_ids.items():
         for object_id in retrieved_ids:
             if object_id not in scraped_ids:
-                scrape_and_store_object(object_id, object_type, session)
+                html_orm = scrape_and_store_object(object_id, object_type, session)
+                parse_and_store_flat(html_orm.html_content, html_orm.html_id, session)
+
             else:
                 LOGGER.info(f"Skipping {object_id} as it has already been scraped")
     session.close()
