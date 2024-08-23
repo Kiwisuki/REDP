@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.property_data_pipeline.crawler.html_retrieval import scrape_url
+from src.scraping_job.crawler.html_retrieval import scrape_url
 
 TEST_PAGES = {
     "butai.html": "https://www.aruodas.lt/butai/puslapis/3/",
@@ -14,7 +14,8 @@ PROJECT_ROOT = CURRENT_SCRIPT_PATH.parents[1]
 TEST_PAGES_DIR = PROJECT_ROOT / "tests" / "test_pages"
 
 
-def main():
+def main() -> None:
+    """Scrape the test pages and save them to the test_pages directory."""
     for file_name, url in TEST_PAGES.items():
         html = scrape_url(url)
         with Path.open(TEST_PAGES_DIR / file_name, "w") as f:

@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy only the necessary files
 COPY requirements.txt .
-COPY src/property_data_pipeline ./src/property_data_pipeline
+COPY src/scraping_job ./src/scraping_job
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -17,4 +17,4 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Command to run the application
-CMD ["python", "-m", "src.property_data_pipeline.main"]
+CMD ["python", "-m", "src.scraping_job.main"]

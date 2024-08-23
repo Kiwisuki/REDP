@@ -1,9 +1,8 @@
 services:
-
-  chrome_scraper:
+  scraping_service:
     extends:
       file: ./scraping-service/compose.yml
-      service: chrome_scraper
+      service: scraping_service
     networks:
       - default_network
     healthcheck:
@@ -45,20 +44,23 @@ services:
     networks:
       - default_network
 
-  html_crawler:
+  html_scraper:
     build:
-      context: ./property-data-pipeline
+      context: ./scraping-job
     depends_on:
       db:
         condition: service_healthy
-      chrome_scraper:
+      scraping_service:
         condition: service_healthy
+    environment:
+      - SCRAPING_SERVICE_URL=http://scraping_service:8000/scrape
     networks:
       - default_network
 
 volumes:
   postgres_data:
   pgadmin_data:
+
 networks:
   default_network:
     driver: bridge

@@ -14,7 +14,8 @@ TEST_PAGES_FILES = ["butai.html", "namai.html", "butu_nuoma.html", "namu_nuoma.h
 
 
 @pytest.fixture()
-def list_pages_html():
+def list_pages_html() -> list[str]:
+    """Return the HTML content of the test pages."""
     pages = []
     for file in TEST_PAGES_FILES:
         with Path.open(TEST_PAGES_DIR / file, "r") as f:
@@ -37,11 +38,13 @@ def list_pages_html():
         (["1-1", "1-12345", "1111-15658", "12-123456"], ["1-12345", "12-123456"]),
     ],
 )
-def test_filter_strings(string_list, expected):
+def test_filter_strings(string_list: list[str], expected: list[str]) -> None:
+    """Test the filter_strings function."""
     assert filter_strings(string_list) == expected
 
 
-def test_get_max_page_number(list_pages_html):
+def test_get_max_page_number(list_pages_html: list[str]) -> None:
+    """Test the get_max_page_number function."""
     assert [get_max_page_number(html) for html in list_pages_html] == [
         365,
         371,
@@ -50,5 +53,6 @@ def test_get_max_page_number(list_pages_html):
     ]
 
 
-def test_retrieve_re_links(list_pages_html):
+def test_retrieve_re_links(list_pages_html: list[str]) -> None:
+    """Test the retrieve_re_ids function."""
     assert [len(retrieve_re_ids(html)) for html in list_pages_html] == [61, 30, 31, 30]
