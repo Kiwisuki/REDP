@@ -1,6 +1,8 @@
+import os
+
 from sqlalchemy.orm import DeclarativeBase
 
-DATABASE_URL = "postgresql://myuser:mypassword@db:5432/myapp"
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 
 class Base(DeclarativeBase):

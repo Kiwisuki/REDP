@@ -54,6 +54,7 @@ services:
         condition: service_healthy
     environment:
       - SCRAPING_SERVICE_URL=http://scraping_service:8000/scrape
+      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/myapp
     networks:
       - default_network
 

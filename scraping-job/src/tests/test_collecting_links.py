@@ -1,7 +1,8 @@
 from pathlib import Path
 
 import pytest
-from src.aruodas_scraper.helpers.links_retrieval import (
+
+from src.scraping_job.scraping.links_retrieval import (
     filter_strings,
     get_max_page_number,
     retrieve_re_ids,
