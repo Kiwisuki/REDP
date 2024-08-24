@@ -55,6 +55,8 @@ services:
     environment:
       - SCRAPING_SERVICE_URL=http://scraping_service:8000/scrape
       - DATABASE_URL=postgresql://myuser:mypassword@db:5432/myapp
+      - PAGE_LIMIT=10
+      - LISTINGS_FROM=2022-01-01
     networks:
       - default_network
 
