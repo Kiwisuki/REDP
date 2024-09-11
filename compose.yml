@@ -1,17 +1,7 @@
 services:
-  scraping_service:
-    extends:
-      file: ./scraping-service/compose.yml
-      service: scraping_service
-    networks:
-      - default_network
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8000/health || exit 1"]
-      interval: 180s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
-
+# ================================================
+# Database services
+# ================================================
   db:
     image: postgres:latest
     environment:
@@ -44,6 +34,55 @@ services:
     networks:
       - default_network
 
+# ================================================
+# Airflow services
+# ================================================
+  airflow-postgres:
+    extends:
+      file: ./airflow/compose.yml
+      service: airflow-postgres
+    networks:
+      - default_network
+
+  airflow-webserver:
+    extends:
+      file: ./airflow/compose.yml
+      service: airflow-webserver
+
+  airflow-scheduler:
+    extends:
+      file: ./airflow/compose.yml
+      service: airflow-scheduler
+    networks:
+      - default_network
+
+  airflow-init:
+    extends:
+      file: ./airflow/compose.yml
+      service: airflow-init
+    networks:
+      - default_network
+
+# ================================================
+# Miscellaneous services
+# ================================================
+  scraping_service:
+    image: scraping-service:latest
+    extends:
+      file: ./scraping-service/compose.yml
+      service: scraping_service
+    networks:
+      - default_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8000/health || exit 1"]
+      interval: 180s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+# ================================================
+# Jobs
+# ================================================
   html_scraper:
     build:
       context: ./scraping-job
@@ -60,14 +99,11 @@ services:
     networks:
       - default_network
   
-  airflow_webserver:
-    extends:
-      file: ./airflow/compose.yml
-      service: webserver
-
 volumes:
   postgres_data:
   pgadmin_data:
+  airflow-postgres-db-volume:
+    name: airflow-postgres-db-volume
 
 networks:
   default_network:
