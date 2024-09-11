@@ -41,9 +41,13 @@ services:
     extends:
       file: ./airflow/compose.yml
       service: airflow-postgres
-    networks:
-      - default_network
 
+  airflow-init:
+    extends:
+      file: ./airflow/compose.yml
+      service: airflow-init
+
+      
   airflow-webserver:
     extends:
       file: ./airflow/compose.yml
@@ -53,15 +57,7 @@ services:
     extends:
       file: ./airflow/compose.yml
       service: airflow-scheduler
-    networks:
-      - default_network
 
-  airflow-init:
-    extends:
-      file: ./airflow/compose.yml
-      service: airflow-init
-    networks:
-      - default_network
 
 # ================================================
 # Miscellaneous services
@@ -83,21 +79,21 @@ services:
 # ================================================
 # Jobs
 # ================================================
-  html_scraper:
-    build:
-      context: ./scraping-job
-    depends_on:
-      db:
-        condition: service_healthy
-      scraping_service:
-        condition: service_healthy
-    environment:
-      - SCRAPING_SERVICE_URL=http://scraping_service:8000/scrape
-      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/myapp
-      - PAGE_LIMIT=10
-      - LISTINGS_FROM=2022-01-01
-    networks:
-      - default_network
+  # html_scraper:
+  #   build:
+  #     context: ./scraping-job
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #     scraping_service:
+  #       condition: service_healthy
+  #   environment:
+  #     - SCRAPING_SERVICE_URL=http://scraping_service:8000/scrape
+  #     - DATABASE_URL=postgresql://myuser:mypassword@db:5432/myapp
+  #     - PAGE_LIMIT=10
+  #     - LISTINGS_FROM=2022-01-01
+  #   networks:
+  #     - default_network
   
 volumes:
   postgres_data:
