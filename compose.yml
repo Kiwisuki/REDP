@@ -59,6 +59,11 @@ services:
       - LISTINGS_FROM=2022-01-01
     networks:
       - default_network
+  
+  airflow_webserver:
+    extends:
+      file: ./airflow/compose.yml
+      service: webserver
 
 volumes:
   postgres_data:
